@@ -5,8 +5,9 @@ RUN useradd -u 10000 manager
 
 WORKDIR /opt/bin/
 
-COPY kube-security-manager /usr/local/bin/kube-security-manager
+COPY controller-manager /usr/local/bin/controller-manager
+COPY node-agent /usr/local/bin/node-agent
 
 USER manager
 
-ENTRYPOINT ["kube-security-manager"]
+ENTRYPOINT ["controller-manager"]

@@ -1,5 +1,3 @@
-# Set the default goal
-.DEFAULT_GOAL := build
 MAKEFLAGS += --no-print-directory
 
 BIN := bin
@@ -21,14 +19,14 @@ SOURCES := $(shell find . -name '*.go')
 IMAGE_TAG := dev
 IMAGE_NAME := docker.io/danielpacak/kube-security-manager:$(IMAGE_TAG)
 
-MKDOCS_IMAGE_REF := mkdocs-material:kube-security-manager
-MKDOCS_PORT := 8000
+.PHONY: all
+all: controller-manager node-agent
 
-$(BIN):
-	$(Q)mkdir -p $@
+controller-manager: $(SOURCES)
+	CGO_ENABLED=0 GOOS=linux $(GO) build -o $@ ./cmd/controller-manager/main.go
 
-$(BIN)/kube-security-manager: $(SOURCES) | $(BIN)
-	CGO_ENABLED=0 GOOS=linux $(GO) build -o $@ ./cmd/security-manager/main.go
+node-agent: $(SOURCES)
+	CGO_ENABLED=0 GOOS=linux $(GO) build -o $@ ./cmd/node-agent/main.go
 
 .PHONY: get-ginkgo
 ## Installs Ginkgo CLI
@@ -69,20 +67,16 @@ endif
 clean:
 	@rm -r ./bin 2> /dev/null || true
 	@rm -r ./dist 2> /dev/null || true
+	rm -rf controller-manager
+	rm -rf node-agent
 
 .PHONY: docker-build
-docker-build: $(BIN)/kube-security-manager
-	$(DOCKER) image build --no-cache -t $(IMAGE_NAME) -f build/security-manager/Dockerfile bin
+docker-build: controller-manager node-agent
+	$(DOCKER) image build --no-cache -t $(IMAGE_NAME) -f Dockerfile .
 
 .PHONY: kind-load-images
 kind-load-images: docker-build
 	$(KIND) load docker-image $(IMAGE_NAME)
 
-## Runs MkDocs development server to preview the documentation page
-mkdocs-serve:
-	$(DOCKER) image build -t $(MKDOCS_IMAGE_REF) -f build/mkdocs-material/Dockerfile bin
-	$(DOCKER) container run --name mkdocs-serve --rm -v $(PWD):/docs -p $(MKDOCS_PORT):8000 $(MKDOCS_IMAGE_REF)
-
 .PHONY: \
-	clean \
-	mkdocs-serve
+	clean

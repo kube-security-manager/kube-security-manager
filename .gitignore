@@ -1,6 +1,9 @@
 .idea/
 .vscode/
 
+controller-manager
+node-agent
+
 bin/
 dist/
 
