@@ -5,15 +5,6 @@
 name: Verify PR
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '*.md'
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - 'LICENSE'
-      - 'NOTICE'
   pull_request:
     branches:
       - main
