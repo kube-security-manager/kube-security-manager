@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/rego"
 	"sigs.k8s.io/controller-runtime/pkg/client"

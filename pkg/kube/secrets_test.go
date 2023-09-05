@@ -6,8 +6,8 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
 
-	"github.com/danielpacak/kube-security-manager/pkg/docker"
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/docker"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

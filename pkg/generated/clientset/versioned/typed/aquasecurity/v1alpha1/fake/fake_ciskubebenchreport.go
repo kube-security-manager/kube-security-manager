@@ -4,11 +4,13 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
-	v1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	v1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/generated/applyconfiguration/aquasecurity/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,9 +21,9 @@ type FakeCISKubeBenchReports struct {
 	Fake *FakeAquasecurityV1alpha1
 }
 
-var ciskubebenchreportsResource = schema.GroupVersionResource{Group: "aquasecurity.github.io", Version: "v1alpha1", Resource: "ciskubebenchreports"}
+var ciskubebenchreportsResource = v1alpha1.SchemeGroupVersion.WithResource("ciskubebenchreports")
 
-var ciskubebenchreportsKind = schema.GroupVersionKind{Group: "aquasecurity.github.io", Version: "v1alpha1", Kind: "CISKubeBenchReport"}
+var ciskubebenchreportsKind = v1alpha1.SchemeGroupVersion.WithKind("CISKubeBenchReport")
 
 // Get takes name of the cISKubeBenchReport, and returns the corresponding cISKubeBenchReport object, and an error if there is any.
 func (c *FakeCISKubeBenchReports) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.CISKubeBenchReport, err error) {
@@ -99,6 +101,27 @@ func (c *FakeCISKubeBenchReports) DeleteCollection(ctx context.Context, opts v1.
 func (c *FakeCISKubeBenchReports) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.CISKubeBenchReport, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewRootPatchSubresourceAction(ciskubebenchreportsResource, name, pt, data, subresources...), &v1alpha1.CISKubeBenchReport{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha1.CISKubeBenchReport), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied cISKubeBenchReport.
+func (c *FakeCISKubeBenchReports) Apply(ctx context.Context, cISKubeBenchReport *aquasecurityv1alpha1.CISKubeBenchReportApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.CISKubeBenchReport, err error) {
+	if cISKubeBenchReport == nil {
+		return nil, fmt.Errorf("cISKubeBenchReport provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(cISKubeBenchReport)
+	if err != nil {
+		return nil, err
+	}
+	name := cISKubeBenchReport.Name
+	if name == nil {
+		return nil, fmt.Errorf("cISKubeBenchReport.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewRootPatchSubresourceAction(ciskubebenchreportsResource, *name, types.ApplyPatchType, data), &v1alpha1.CISKubeBenchReport{})
 	if obj == nil {
 		return nil, err
 	}

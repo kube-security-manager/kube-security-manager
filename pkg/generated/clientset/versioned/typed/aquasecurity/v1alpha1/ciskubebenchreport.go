@@ -4,10 +4,13 @@ package v1alpha1
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 	"time"
 
-	v1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	scheme "github.com/danielpacak/kube-security-manager/pkg/generated/clientset/versioned/scheme"
+	v1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/generated/applyconfiguration/aquasecurity/v1alpha1"
+	scheme "github.com/kube-security-manager/kube-security-manager/pkg/generated/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -30,6 +33,7 @@ type CISKubeBenchReportInterface interface {
 	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.CISKubeBenchReportList, error)
 	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.CISKubeBenchReport, err error)
+	Apply(ctx context.Context, cISKubeBenchReport *aquasecurityv1alpha1.CISKubeBenchReportApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.CISKubeBenchReport, err error)
 	CISKubeBenchReportExpansion
 }
 
@@ -145,6 +149,31 @@ func (c *cISKubeBenchReports) Patch(ctx context.Context, name string, pt types.P
 		Name(name).
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied cISKubeBenchReport.
+func (c *cISKubeBenchReports) Apply(ctx context.Context, cISKubeBenchReport *aquasecurityv1alpha1.CISKubeBenchReportApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.CISKubeBenchReport, err error) {
+	if cISKubeBenchReport == nil {
+		return nil, fmt.Errorf("cISKubeBenchReport provided to Apply must not be nil")
+	}
+	patchOpts := opts.ToPatchOptions()
+	data, err := json.Marshal(cISKubeBenchReport)
+	if err != nil {
+		return nil, err
+	}
+	name := cISKubeBenchReport.Name
+	if name == nil {
+		return nil, fmt.Errorf("cISKubeBenchReport.Name must be provided to Apply")
+	}
+	result = &v1alpha1.CISKubeBenchReport{}
+	err = c.client.Patch(types.ApplyPatchType).
+		Resource("ciskubebenchreports").
+		Name(*name).
+		VersionedParams(&patchOpts, scheme.ParameterCodec).
 		Body(data).
 		Do(ctx).
 		Into(result)

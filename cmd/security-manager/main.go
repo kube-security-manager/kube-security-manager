@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/danielpacak/kube-security-manager/pkg/operator"
-	"github.com/danielpacak/kube-security-manager/pkg/operator/etc"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
-	"sigs.k8s.io/controller-runtime"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator/etc"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
+	controllerruntime "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 )

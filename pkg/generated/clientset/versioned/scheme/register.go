@@ -3,7 +3,7 @@
 package scheme
 
 import (
-	aquasecurityv1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

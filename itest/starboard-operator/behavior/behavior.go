@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/danielpacak/kube-security-manager/itest/helper"
+	"github.com/kube-security-manager/kube-security-manager/itest/helper"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
 	batchv1beta1 "k8s.io/api/batch/v1beta1"

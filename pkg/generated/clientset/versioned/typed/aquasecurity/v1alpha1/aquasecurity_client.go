@@ -5,8 +5,8 @@ package v1alpha1
 import (
 	"net/http"
 
-	v1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/generated/clientset/versioned/scheme"
+	v1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/generated/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

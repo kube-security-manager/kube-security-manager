@@ -1,4 +1,4 @@
-module github.com/danielpacak/kube-security-manager
+module github.com/kube-security-manager/kube-security-manager
 
 go 1.19
 
@@ -19,6 +19,7 @@ require (
 	k8s.io/code-generator v0.27.4
 	k8s.io/utils v0.0.0-20230220204549-a5ecb0141aa5
 	sigs.k8s.io/controller-runtime v0.15.1
+	sigs.k8s.io/structured-merge-diff/v4 v4.2.3
 )
 
 require (
@@ -96,6 +97,5 @@ require (
 	k8s.io/klog/v2 v2.90.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230501164219-8b0f38b5fd1f // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
-	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danielpacak/kube-security-manager/pkg/ext"
+	"github.com/kube-security-manager/kube-security-manager/pkg/ext"
 	"github.com/stretchr/testify/assert"
 )
 

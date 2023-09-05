@@ -6,9 +6,9 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	"github.com/onsi/gomega/types"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"

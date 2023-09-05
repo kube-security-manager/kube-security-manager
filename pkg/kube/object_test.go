@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	appsv1 "k8s.io/api/apps/v1"

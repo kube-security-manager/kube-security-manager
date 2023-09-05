@@ -3,8 +3,8 @@ package controller
 import (
 	"context"
 
-	"github.com/danielpacak/kube-security-manager/pkg/operator/etc"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator/etc"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	batchv1 "k8s.io/api/batch/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )

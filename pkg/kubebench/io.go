@@ -3,8 +3,8 @@ package kubebench
 import (
 	"context"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"

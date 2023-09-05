@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	aquasecurityv1alpha1 "github.com/danielpacak/kube-security-manager/pkg/generated/clientset/versioned/typed/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/generated/clientset/versioned/typed/aquasecurity/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -17,8 +17,7 @@ type Interface interface {
 	AquasecurityV1alpha1() aquasecurityv1alpha1.AquasecurityV1alpha1Interface
 }
 
-// Clientset contains the clients for groups. Each group has exactly one
-// version included in a Clientset.
+// Clientset contains the clients for groups.
 type Clientset struct {
 	*discovery.DiscoveryClient
 	aquasecurityV1alpha1 *aquasecurityv1alpha1.AquasecurityV1alpha1Client

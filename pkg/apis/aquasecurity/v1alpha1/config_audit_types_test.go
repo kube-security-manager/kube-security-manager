@@ -3,7 +3,7 @@ package v1alpha1_test
 import (
 	"testing"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -3,7 +3,7 @@ package etc_test
 import (
 	"testing"
 
-	"github.com/danielpacak/kube-security-manager/pkg/operator/etc"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator/etc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

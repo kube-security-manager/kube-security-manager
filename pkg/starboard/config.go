@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
 	"github.com/google/go-containerregistry/pkg/name"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
 	batchv1beta1 "k8s.io/api/batch/v1beta1"

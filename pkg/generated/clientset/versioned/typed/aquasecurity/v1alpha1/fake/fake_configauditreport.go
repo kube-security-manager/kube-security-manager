@@ -4,11 +4,13 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
-	v1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	v1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/generated/applyconfiguration/aquasecurity/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -20,9 +22,9 @@ type FakeConfigAuditReports struct {
 	ns   string
 }
 
-var configauditreportsResource = schema.GroupVersionResource{Group: "aquasecurity.github.io", Version: "v1alpha1", Resource: "configauditreports"}
+var configauditreportsResource = v1alpha1.SchemeGroupVersion.WithResource("configauditreports")
 
-var configauditreportsKind = schema.GroupVersionKind{Group: "aquasecurity.github.io", Version: "v1alpha1", Kind: "ConfigAuditReport"}
+var configauditreportsKind = v1alpha1.SchemeGroupVersion.WithKind("ConfigAuditReport")
 
 // Get takes name of the configAuditReport, and returns the corresponding configAuditReport object, and an error if there is any.
 func (c *FakeConfigAuditReports) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.ConfigAuditReport, err error) {
@@ -106,6 +108,28 @@ func (c *FakeConfigAuditReports) DeleteCollection(ctx context.Context, opts v1.D
 func (c *FakeConfigAuditReports) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.ConfigAuditReport, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(configauditreportsResource, c.ns, name, pt, data, subresources...), &v1alpha1.ConfigAuditReport{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha1.ConfigAuditReport), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied configAuditReport.
+func (c *FakeConfigAuditReports) Apply(ctx context.Context, configAuditReport *aquasecurityv1alpha1.ConfigAuditReportApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.ConfigAuditReport, err error) {
+	if configAuditReport == nil {
+		return nil, fmt.Errorf("configAuditReport provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(configAuditReport)
+	if err != nil {
+		return nil, err
+	}
+	name := configAuditReport.Name
+	if name == nil {
+		return nil, fmt.Errorf("configAuditReport.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(configauditreportsResource, c.ns, *name, types.ApplyPatchType, data), &v1alpha1.ConfigAuditReport{})
 
 	if obj == nil {
 		return nil, err

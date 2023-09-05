@@ -4,11 +4,13 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
-	v1alpha1 "github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	v1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	aquasecurityv1alpha1 "github.com/kube-security-manager/kube-security-manager/pkg/generated/applyconfiguration/aquasecurity/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,9 +21,9 @@ type FakeClusterConfigAuditReports struct {
 	Fake *FakeAquasecurityV1alpha1
 }
 
-var clusterconfigauditreportsResource = schema.GroupVersionResource{Group: "aquasecurity.github.io", Version: "v1alpha1", Resource: "clusterconfigauditreports"}
+var clusterconfigauditreportsResource = v1alpha1.SchemeGroupVersion.WithResource("clusterconfigauditreports")
 
-var clusterconfigauditreportsKind = schema.GroupVersionKind{Group: "aquasecurity.github.io", Version: "v1alpha1", Kind: "ClusterConfigAuditReport"}
+var clusterconfigauditreportsKind = v1alpha1.SchemeGroupVersion.WithKind("ClusterConfigAuditReport")
 
 // Get takes name of the clusterConfigAuditReport, and returns the corresponding clusterConfigAuditReport object, and an error if there is any.
 func (c *FakeClusterConfigAuditReports) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.ClusterConfigAuditReport, err error) {
@@ -99,6 +101,27 @@ func (c *FakeClusterConfigAuditReports) DeleteCollection(ctx context.Context, op
 func (c *FakeClusterConfigAuditReports) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.ClusterConfigAuditReport, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewRootPatchSubresourceAction(clusterconfigauditreportsResource, name, pt, data, subresources...), &v1alpha1.ClusterConfigAuditReport{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha1.ClusterConfigAuditReport), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied clusterConfigAuditReport.
+func (c *FakeClusterConfigAuditReports) Apply(ctx context.Context, clusterConfigAuditReport *aquasecurityv1alpha1.ClusterConfigAuditReportApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.ClusterConfigAuditReport, err error) {
+	if clusterConfigAuditReport == nil {
+		return nil, fmt.Errorf("clusterConfigAuditReport provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(clusterConfigAuditReport)
+	if err != nil {
+		return nil, err
+	}
+	name := clusterConfigAuditReport.Name
+	if name == nil {
+		return nil, fmt.Errorf("clusterConfigAuditReport.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewRootPatchSubresourceAction(clusterconfigauditreportsResource, *name, types.ApplyPatchType, data), &v1alpha1.ClusterConfigAuditReport{})
 	if obj == nil {
 		return nil, err
 	}

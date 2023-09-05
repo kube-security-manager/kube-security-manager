@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"hash"
 	"hash/fnv"
-	"k8s.io/utils/pointer"
 	"time"
 
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
+	"k8s.io/utils/pointer"
+
 	"github.com/davecgh/go-spew/spew"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/util/rand"

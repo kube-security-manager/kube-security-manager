@@ -3,7 +3,7 @@
 package v1alpha1
 
 import (
-	internalinterfaces "github.com/danielpacak/kube-security-manager/pkg/generated/informers/externalversions/internalinterfaces"
+	internalinterfaces "github.com/kube-security-manager/kube-security-manager/pkg/generated/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to all the informers in this group version.

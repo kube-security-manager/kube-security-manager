@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/ext"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/ext"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

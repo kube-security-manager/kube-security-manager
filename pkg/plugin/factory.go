@@ -3,10 +3,10 @@ package plugin
 import (
 	"fmt"
 
-	"github.com/danielpacak/kube-security-manager/pkg/ext"
-	"github.com/danielpacak/kube-security-manager/pkg/plugin/trivy"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
-	"github.com/danielpacak/kube-security-manager/pkg/vulnerabilityreport"
+	"github.com/kube-security-manager/kube-security-manager/pkg/ext"
+	"github.com/kube-security-manager/kube-security-manager/pkg/plugin/trivy"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
+	"github.com/kube-security-manager/kube-security-manager/pkg/vulnerabilityreport"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 

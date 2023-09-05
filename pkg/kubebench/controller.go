@@ -1,17 +1,17 @@
 package kubebench
 
 import (
-	. "github.com/danielpacak/kube-security-manager/pkg/operator/predicate"
+	. "github.com/kube-security-manager/kube-security-manager/pkg/operator/predicate"
 
 	"context"
 	"fmt"
 
-	"github.com/danielpacak/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
-	"github.com/danielpacak/kube-security-manager/pkg/kube"
-	"github.com/danielpacak/kube-security-manager/pkg/operator/controller"
-	"github.com/danielpacak/kube-security-manager/pkg/operator/etc"
-	"github.com/danielpacak/kube-security-manager/pkg/starboard"
 	"github.com/go-logr/logr"
+	"github.com/kube-security-manager/kube-security-manager/pkg/apis/aquasecurity/v1alpha1"
+	"github.com/kube-security-manager/kube-security-manager/pkg/kube"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator/controller"
+	"github.com/kube-security-manager/kube-security-manager/pkg/operator/etc"
+	"github.com/kube-security-manager/kube-security-manager/pkg/starboard"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
