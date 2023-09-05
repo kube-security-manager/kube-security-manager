@@ -1,0 +1,66 @@
+---
+site_name: The Kubernetes Security Manager
+site_url: https://software-clinic.github.io/kube-security-manager/
+site_description: The Kubernetes Security Manager
+docs_dir: docs/
+repo_name: GitHub
+repo_url: https://github.com/SOFTWARE-CLINIC/kube-security-manager
+edit_uri: ""
+
+nav:
+  - Introduction: index.md
+  - Overview: overview.md
+  - Installation:
+      - kubectl: installation/kubectl.md
+      - Helm: installation/helm.md
+      - Operator Lifecycle Manager: installation/olm.md
+      - Upgrade: installation/upgrade.md
+  - Getting Started: getting-started.md
+  - Configuration: configuration.md
+  - Troubleshooting: troubleshooting.md
+  - Settings: settings.md
+  - Vulnerability Scanning:
+      - Overview: vulnerability-scanning/index.md
+      - Trivy Scanner: vulnerability-scanning/trivy.md
+      - Private Registries: vulnerability-scanning/private-registries.md
+      - Managed Registries: vulnerability-scanning/managed-registries.md
+  - Configuration Auditing:
+      - Overview: configuration-auditing/index.md
+      - Built-in Configuration Audit Policies: configuration-auditing/built-in-policies.md
+      - Infrastructure Scanners:
+          - Overview: configuration-auditing/infrastructure-scanners/index.md
+  - Tutorials:
+      - Writing Custom Configuration Audit Policies: tutorials/writing-custom-configuration-audit-policies.md
+      - Manage Access to Security Reports: tutorials/manage_access_to_security_reports.md
+  - Custom Resource Definitions:
+      - Overview: crds/index.md
+      - VulnerabilityReport: crds/vulnerability-report.md
+      - ClusterVulnerabilityReport: crds/clustervulnerability-report.md
+      - ConfigAuditReport: crds/configaudit-report.md
+      - ClusterConfigAuditReport: crds/clusterconfigaudit-report.md
+      - CISKubeBenchReport: crds/ciskubebench-report.md
+
+theme:
+  name: material
+  language: 'en'
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - admonition
+  - toc:
+      permalink: true
+
+# All data defined under extra is automatically exposed as a variable and can
+# be used from the template. For example, {{ var.version }}.
+#
+# Requires pip install mike and pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
+extra:
+  var:
+    prev_git_tag: "v0.15.5"
+    chart_version: 0.10.6
+
+# Requires pip install mkdocs-macros-plugin
+plugins:
+  - search
+  - macros

@@ -1,0 +1,111 @@
+---
+release:
+  draft: false
+  prerelease: auto
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+before:
+  hooks:
+    - go mod download
+builds:
+  - id: kube-security-manager
+    main: ./cmd/security-manager/main.go
+    binary: kube-security-manager
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm
+      - arm64
+      - s390x
+      - ppc64le
+    goarm:
+      - "7"
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .FullCommit }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs'
+      - '^test'
+      - '^release'
+dockers:
+  - image_templates:
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-amd64"
+    use: buildx
+    goos: linux
+    dockerfile: build/security-manager/Dockerfile
+    goarch: amd64
+    ids:
+      - kube-security-manager
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title=kube-security-manager"
+      - "--label=org.opencontainers.image.description=The Kubernetes Security Manager"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/danielpacak/kube-security-manager"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.documentation=https://danielpacak.github.io/kube-security-manager/"
+      - "--platform=linux/amd64"
+  - image_templates:
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-arm64"
+    use: buildx
+    goos: linux
+    dockerfile: build/security-manager/Dockerfile
+    goarch: arm64
+    ids:
+      - kube-security-manager
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title=kube-security-manager"
+      - "--label=org.opencontainers.image.description=The Kubernetes Security Manager"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/danielpacak/kube-security-manager"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.documentation=https://danielpacak.github.io/kube-security-manager/"
+      - "--platform=linux/arm64"
+  - image_templates:
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-s390x"
+    use: buildx
+    goos: linux
+    dockerfile: build/security-manager/Dockerfile
+    goarch: s390x
+    ids:
+      - kube-security-manager
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title=kube-security-manager"
+      - "--label=org.opencontainers.image.description=The Kubernetes Security Manager"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/danielpacak/kube-security-manager"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.documentation=https://danielpacak.github.io/kube-security-manager/"
+      - "--platform=linux/s390x"
+  - image_templates:
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-ppc64le"
+    use: buildx
+    goos: linux
+    dockerfile: build/security-manager/Dockerfile
+    goarch: ppc64le
+    ids:
+      - kube-security-manager
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title=kube-security-manager"
+      - "--label=org.opencontainers.image.description=The Kubernetes Security Manager"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/danielpacak/kube-security-manager"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.documentation=https://danielpacak.github.io/kube-security-manager/"
+      - "--platform=linux/ppc64le"
+docker_manifests:
+  - name_template: "docker.io/danielpacak/kube-security-manager:{{ .Version }}"
+    image_templates:
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-amd64"
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-arm64"
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-s390x"
+      - "docker.io/danielpacak/kube-security-manager:{{ .Version }}-ppc64le"
