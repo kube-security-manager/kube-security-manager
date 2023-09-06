@@ -70,12 +70,12 @@ clean:
 	rm -rf controller-manager
 	rm -rf node-agent
 
-.PHONY: docker-build
-docker-build: controller-manager node-agent
+.PHONY: docker-image
+docker-image: controller-manager node-agent
 	$(DOCKER) image build --no-cache -t $(IMAGE_NAME) -f Dockerfile .
 
-.PHONY: kind-load-images
-kind-load-images: docker-build
+.PHONY: kind-load-image
+kind-load-image: docker-image
 	$(KIND) load docker-image $(IMAGE_NAME)
 
 .PHONY: \

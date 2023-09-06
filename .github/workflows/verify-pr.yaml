@@ -8,12 +8,6 @@ on:
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - '*.md'
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - 'LICENSE'
-      - 'NOTICE'
 
 env:
   KIND_IMAGE: "kindest/node:v1.21.14@sha256:220cfafdf6e3915fbce50e13d1655425558cb98872c53f802605aa2fb2d569cf"
