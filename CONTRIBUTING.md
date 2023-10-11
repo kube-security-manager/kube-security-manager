@@ -15,7 +15,6 @@ These guidelines will help you get started with Kubernetes Security Manager.
 - [Test Starboard Operator](#test-starboard-operator)
   - [In Cluster](#in-cluster)
   - [Out of Cluster](#out-of-cluster)
-- [Update Static YAML Manifests](#update-static-yaml-manifests)
 
 ## Set up your Development Environment
 
@@ -202,26 +201,6 @@ You can uninstall the operator with:
 kubectl delete -f deploy/static/starboard.yaml
 ```
 
-## Update Static YAML Manifests
-
-```
-mkdir -p $TMPDIR/starboard-helm-template
-```
-
-```
-helm template starboard-operator ./deploy/helm \
-  --namespace starboard-system --create-namespace \
-  --set="targetNamespaces=default" \
-  --set="managedBy=kubectl" \
-  --output-dir=$TMPDIR/starboard-helm-template
-```
-
-```
-cp $TMPDIR/starboard-helm-template/starboard-operator/templates/rbac.yaml deploy/static/02-starboard-operator.rbac.yaml
-cp $TMPDIR/starboard-helm-template/starboard-operator/templates/config.yaml deploy/static/03-starboard-operator.config.yaml
-cp $TMPDIR/starboard-helm-template/starboard-operator/templates/deployment.yaml deploy/static/04-starboard-operator.deployment.yaml
-```
-
 ## Resources
 
 * https://github.com/eunomia-bpf/bpf-developer-tutorial/
@@ -231,9 +210,4 @@ cp $TMPDIR/starboard-helm-template/starboard-operator/templates/deployment.yaml 
 [kind]: https://github.com/kubernetes-sigs/kind
 [codecov]: https://codecov.io/
 [codecov-merging-reports]: https://docs.codecov.io/docs/merging-reports/
-[Operator Lifecycle Manager]: https://github.com/operator-framework/operator-lifecycle-manager
-[community-operators]: https://github.com/k8s-operatorhub/community-operators
-[olm-operator-groups]: https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/operatorgroups.md
 [k8s-sample-controller]: https://github.com/kubernetes/sample-controller
-[starboard-install-olm]: https://aquasecurity.github.io/starboard/latest/operator/installation/olm
-[olm-testing-operators]: https://github.com/operator-framework/community-operators/blob/master/docs/testing-operators.md

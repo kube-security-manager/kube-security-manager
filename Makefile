@@ -43,16 +43,16 @@ unit-tests: $(SOURCES)
 itests-starboard-operator: check-kubeconfig get-ginkgo
 	@$(GINKGO) \
 	-coverprofile=coverage.txt \
-	-coverpkg=github.com/aquasecurity/starboard/pkg/operator,\
-	github.com/aquasecurity/starboard/pkg/operator/predicate,\
-	github.com/aquasecurity/starboard/pkg/operator/controller,\
-	github.com/aquasecurity/starboard/pkg/plugin,\
-	github.com/aquasecurity/starboard/pkg/plugin/trivy,\
-	github.com/aquasecurity/starboard/pkg/plugin/polaris,\
-	github.com/aquasecurity/starboard/pkg/plugin/conftest,\
-	github.com/aquasecurity/starboard/pkg/configauditreport,\
-	github.com/aquasecurity/starboard/pkg/vulnerabilityreport,\
-	github.com/aquasecurity/starboard/pkg/kubebench \
+	-coverpkg=github.com/kube-security-manager/kube-security-manager/pkg/operator,\
+	github.com/kube-security-manager/kube-security-manager/pkg/operator/predicate,\
+	github.com/kube-security-manager/kube-security-manager/pkg/operator/controller,\
+	github.com/kube-security-manager/kube-security-manager/pkg/plugin,\
+	github.com/kube-security-manager/kube-security-manager/pkg/plugin/trivy,\
+	github.com/kube-security-manager/kube-security-manager/pkg/plugin/polaris,\
+	github.com/kube-security-manager/kube-security-manager/pkg/plugin/conftest,\
+	github.com/kube-security-manager/kube-security-manager/pkg/configauditreport,\
+	github.com/kube-security-manager/kube-security-manager/pkg/vulnerabilityreport,\
+	github.com/kube-security-manager/kube-security-manager/pkg/kubebench \
 	./itest/starboard-operator
 
 .PHONY: check-kubeconfig
